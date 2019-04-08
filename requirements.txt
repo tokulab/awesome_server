@@ -2,5 +2,3 @@ Flask
 gunicorn
 Jinja2
 pip
-Werkzurg
-itsdangerous
