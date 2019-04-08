@@ -1,0 +1,7 @@
+Flask
+gunicorn
+Jinja2
+pip
+qsfiref
+Werkzurg
+itsdangerous

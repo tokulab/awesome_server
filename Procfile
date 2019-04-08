@@ -1,0 +1,1 @@
+web: gunicorn decoy:app --log-file -
