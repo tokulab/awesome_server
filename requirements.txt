@@ -2,6 +2,5 @@ Flask
 gunicorn
 Jinja2
 pip
-wsgiref
 Werkzurg
 itsdangerous
