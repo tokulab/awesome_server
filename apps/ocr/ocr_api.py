@@ -43,6 +43,24 @@ class Ocr():
             for i in range(int(num)):
                 self.img.append(Image.open(path+name))
 
+    def img_effect(self, *args, show=False):
+        effect_dict = {
+            'gray': ImageOps.grayscale,
+            'reverse_rgb': ImageOps.invert,
+        }
+        for eff in args:
+            self.img = [effect_dict[eff](img) for img in self.img]
+            sys.stdout.write(eff)
+            if eff != args[-1]:
+                sys.stdout.write(' -> ')
+            else:
+                sys.stdout.write('\n')
+            sys.stdout.flush()
+        if show == True:
+            for img in self.img:
+                img.show()
+
+
     def img_to_str(self, target=0, **kwargs):
         if len(self.img) == 0:
             raise Exception('not read img!')
