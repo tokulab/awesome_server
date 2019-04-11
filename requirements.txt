@@ -2,3 +2,6 @@ Flask
 gunicorn
 Jinja2
 pip
+base64
+Pillow
+pyocr

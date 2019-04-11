@@ -3,12 +3,14 @@ import sys
 import pyocr
 import pyocr.builders
 
+from handler.imgio import encode_to_b64, decode_to_img
+
 # base64をキャッチするとこを別ライブラリから記載
 
-tools = pyocr.get_available_tools()
-if len(tools) == 0:
-    print('no ocr tools.')
-    sys.exit(1)
+# tools = pyocr.get_available_tools()
+# if len(tools) == 0:
+#     print('no ocr tools.')
+#     sys.exit(1)
 
 #
 # tool = tools[0]
@@ -43,6 +45,9 @@ class Ocr():
             for i in range(int(num)):
                 self.img.append(Image.open(path+name))
 
+    def posted_img(self, raw_img):
+        b64 = encode_to_b64(raw_img)
+
     def img_effect(self, *args, show=False):
         effect_dict = {
             'gray': ImageOps.grayscale,
@@ -59,7 +64,6 @@ class Ocr():
         if show == True:
             for img in self.img:
                 img.show()
-
 
     def img_to_str(self, target=0, **kwargs):
         if len(self.img) == 0:
