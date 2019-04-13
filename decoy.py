@@ -11,7 +11,7 @@ def index():
 
 @app.route('/ocr/api/', methods=['POST'])
 def ocr():
-
+    pass
 
 if __name__ == '__main__':
     app.run()
