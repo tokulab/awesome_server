@@ -9,9 +9,9 @@ app = Flask(__name__)
 def index():
     return render_template('home.html')
 
-@app.route('/ocr/post/', methods=['POST'])
+@app.route('/ocr/api/', methods=['POST'])
 def ocr():
-
+    pass
 
 if __name__ == '__main__':
     app.run()
