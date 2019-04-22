@@ -1,20 +1,24 @@
 from flask import Flask
 from flask import render_template, request, redirect, url_for
+from flask_sockets import Sockets
+import gevent
 
 from apps.ocr.ocr_api import Ocr
 
 app = Flask(__name__)
+sockets = Sockets(app=app)
 
 @app.route('/')
 def index():
     return render_template('home.html')
 
-@app.route('/apis/ocr/direct', methods=['GET', 'POST'])
+@sockets.route('/apis/ocr/direct', methods=['GET', 'POST'])
 def ocr_direct():
     query = request.args
     ocr = Ocr('./config.yaml')
     img = request.files['file']
     ocr.posted_img(img)
+    gevent.sleep(2)
     result = ocr.img_to_str(lang='jpn', tesseract_layout=6)
     json_data = ocr.format_to_json(result=result,
                                    name=img.filename,
