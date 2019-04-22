@@ -11,11 +11,19 @@ def index():
 
 @app.route('/apis/ocr/direct', methods=['GET', 'POST'])
 def ocr_direct():
-    # ocr = Ocr('./config.yaml')
-    # img = request.data
-    print(request.files['file'])
-    # b64 = ocr.posted_img(request.data)
-    # print(b64)
-    return request.files['file'].filename
+    query = request.args
+    ocr = Ocr('./config.yaml')
+    img = request.files['file']
+    ocr.posted_img(img)
+    result = ocr.img_to_str(lang='jpn', tesseract_layout=6)
+    json_data = ocr.format_to_json(result=result,
+                                   name=img.filename,
+                                   ensure_ascii=False if query['asc'] == '0' else True,
+                                   indent=2,
+                                   del_lf=True)
+
+    return json_data
+
 if __name__ == '__main__':
-    app.run(debug=True, port=4999)
+    # app.run(debug=True, port=4999)
+    app.run()
