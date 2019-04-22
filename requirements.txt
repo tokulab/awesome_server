@@ -3,4 +3,4 @@ gunicorn
 Jinja2
 pip
 Pillow
-pyocr
+pyocr==0.5.3
