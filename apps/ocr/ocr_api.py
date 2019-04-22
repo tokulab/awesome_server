@@ -1,9 +1,12 @@
 from PIL import Image, ImageFilter, ImageOps
 import sys
+import json
 import pyocr
 import pyocr.builders
 
-from .handler.imgio import encode_to_b64, decode_to_img
+from .handler import imgio
+# from handler import imgio
+
 
 # base64をキャッチするとこを別ライブラリから記載
 
@@ -46,8 +49,9 @@ class Ocr():
                 self.img.append(Image.open(path+name))
 
     def posted_img(self, raw_img):
-        b64 = encode_to_b64(raw_img)
-        return b64
+        b64 = imgio.encode_to_b64(raw_img)
+        img_bin = imgio.decode_to_img(b64)
+        self.img = [Image.open(img_bin)]
 
     def img_effect(self, *args, show=False):
         effect_dict = {
@@ -75,6 +79,28 @@ class Ocr():
             builder=pyocr.builders.TextBuilder(tesseract_layout=kwargs['tesseract_layout'])
         )
         return infer
+
+    def check_set_imgs(self):
+        print(self.img)
+
+    def format_to_json(self, result, name, ensure_ascii=False, indent=2, del_lf=False):
+        result_dic = {'status_code':None,
+                      'img_name':None,
+                      'infer':None
+                      }
+        if del_lf == True:
+            result = result.replace('\n', '')
+        ok = [200, name, result]
+        err = [400, '', '']
+        print(result)
+        if result == None or result == '':
+            for key, data in zip(list(result_dic.keys()), err):
+                result_dic[key] = data
+        else:
+            for key, data in zip(list(result_dic.keys()), ok):
+                result_dic[key] = data
+        return json.dumps(result_dic, ensure_ascii=ensure_ascii, indent=indent)
+
 
     def __set_config(self, config_path):
         import yaml
