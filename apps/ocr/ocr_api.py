@@ -3,7 +3,7 @@ import sys
 import pyocr
 import pyocr.builders
 
-from handler.imgio import encode_to_b64, decode_to_img
+from .handler.imgio import encode_to_b64, decode_to_img
 
 # base64をキャッチするとこを別ライブラリから記載
 
@@ -27,12 +27,12 @@ from handler.imgio import encode_to_b64, decode_to_img
 # print(infer)
 
 class Ocr():
-    def __init__(self):
+    def __init__(self, config_path):
         tools = pyocr.get_available_tools()
         if len(tools) == 0:
             raise Exception('no ocr tools!')
         self.tool = tools[0]
-        self.config = self.__set_config('./config.yaml')
+        self.config = self.__set_config(config_path)
 
     def read_img(self, name, num=1):
         relative_head = './'
@@ -47,6 +47,7 @@ class Ocr():
 
     def posted_img(self, raw_img):
         b64 = encode_to_b64(raw_img)
+        return b64
 
     def img_effect(self, *args, show=False):
         effect_dict = {

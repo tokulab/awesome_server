@@ -9,9 +9,13 @@ app = Flask(__name__)
 def index():
     return render_template('home.html')
 
-@app.route('/ocr/api/', methods=['POST'])
-def ocr():
-    pass
-
+@app.route('/apis/ocr/direct', methods=['GET', 'POST'])
+def ocr_direct():
+    # ocr = Ocr('./config.yaml')
+    # img = request.data
+    print(request.files['file'])
+    # b64 = ocr.posted_img(request.data)
+    # print(b64)
+    return request.files['file'].filename
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True, port=4999)
