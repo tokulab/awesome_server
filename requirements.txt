@@ -1,4 +1,6 @@
 Flask
+flask-sockets
+gevent
 gunicorn
 Jinja2
 pip
