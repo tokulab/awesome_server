@@ -5,5 +5,5 @@ gunicorn
 Jinja2
 pip
 Pillow
-pyyaml
+PyYAML==3.13
 pyocr==0.5.3
