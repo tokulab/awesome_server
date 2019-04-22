@@ -16,6 +16,7 @@ def index():
 def ocr_direct():
     query = request.args
     ocr = Ocr('./config.yaml')
+    gevent.sleep(1)
     img = request.files['file']
     ocr.posted_img(img)
     gevent.sleep(2)

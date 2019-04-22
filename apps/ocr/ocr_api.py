@@ -32,6 +32,7 @@ from .handler import imgio
 class Ocr():
     def __init__(self, config_path):
         tools = pyocr.get_available_tools()
+        print(tools)
 
         if len(tools) == 0:
             raise Exception('no ocr tools!')
