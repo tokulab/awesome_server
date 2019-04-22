@@ -93,7 +93,6 @@ class Ocr():
             result = result.replace('\n', '')
         ok = [200, name, result]
         err = [400, '', '']
-        print(result)
         if result == None or result == '':
             for key, data in zip(list(result_dic.keys()), err):
                 result_dic[key] = data

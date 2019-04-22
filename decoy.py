@@ -6,13 +6,13 @@ import gevent
 from apps.ocr.ocr_api import Ocr
 
 app = Flask(__name__)
-sockets = Sockets(app=app)
+# sockets = Sockets(app=app)
 
 @app.route('/')
 def index():
     return render_template('home.html')
 
-@sockets.route('/apis/ocr/direct', methods=['GET', 'POST'])
+@app.route('/apis/ocr/direct', methods=['GET', 'POST'])
 def ocr_direct():
     query = request.args
     ocr = Ocr('./config.yaml')
