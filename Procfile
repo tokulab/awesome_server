@@ -1,1 +1,1 @@
-web: gunicorn -k flask_sockets.worker decoy:app --log-file -
+web: gunicorn  decoy:app --log-file -

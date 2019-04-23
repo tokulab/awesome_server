@@ -1,6 +1,7 @@
 from PIL import Image, ImageFilter, ImageOps
 import sys
 import json
+import yaml
 import pyocr
 import pyocr.builders
 
@@ -104,7 +105,6 @@ class Ocr():
 
 
     def __set_config(self, config_path):
-        import yaml
         with open(config_path, 'r+') as conf:
             config = yaml.load(conf)
         return config
