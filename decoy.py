@@ -31,4 +31,4 @@ def ocr_direct():
 
 if __name__ == '__main__':
     # app.run(debug=True, port=4999)
-    app.run()
+    app.run(debug=True)
