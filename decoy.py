@@ -20,7 +20,7 @@ def ocr_direct():
     img = request.files['file']
     ocr.posted_img(img)
     gevent.sleep(2)
-    result = ocr.img_to_str(lang='jpn', tesseract_layout=6)
+    result = ocr.img_to_str(lang='eng', tesseract_layout=6)
     json_data = ocr.format_to_json(result=result,
                                    name=img.filename,
                                    ensure_ascii=False if query['asc'] == '0' else True,
