@@ -30,6 +30,12 @@ def ocr_direct():
 
     return json_data
 
+@app.route('/apis/ocr/', methods=['GET'])
+def check_pyocr():
+    ocr = Ocr('./config.yaml')
+    ocr.check_pyocr()
+    return 'check developper console.'
+
 
 @app.errorhandler(400)
 def not_found(err):
