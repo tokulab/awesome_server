@@ -85,6 +85,7 @@ class Ocr():
         return infer
 
     def img_to_str_origin(self):
+        pass
 
     def check_set_imgs(self):
         print(self.img)
