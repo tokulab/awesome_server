@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, jsonify
 from flask_sockets import Sockets
 import gevent
 
@@ -11,6 +11,7 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     return render_template('home.html')
+
 
 @app.route('/apis/ocr/direct', methods=['GET', 'POST'])
 def ocr_direct():
@@ -28,6 +29,19 @@ def ocr_direct():
                                    del_lf=True)
 
     return json_data
+
+
+@app.errorhandler(400):
+def not_found(err):
+    resp = jsonify(
+        {
+            u'status_code': 404,
+            u'message': u'not found.'
+        }
+    )
+    resp.status_code = 404
+    return resp
+
 
 if __name__ == '__main__':
     # app.run(debug=True, port=4999)
