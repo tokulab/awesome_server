@@ -31,7 +31,7 @@ def ocr_direct():
     return json_data
 
 
-@app.errorhandler(400):
+@app.errorhandler(400)
 def not_found(err):
     resp = jsonify(
         {
