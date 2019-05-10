@@ -4,6 +4,8 @@ from flask_sockets import Sockets
 import gevent
 
 from apps.ocr.ocr_api import Ocr
+from apps.lightweight_translate.api import TranslateApi
+
 
 app = Flask(__name__)
 # sockets = Sockets(app=app)
@@ -35,6 +37,23 @@ def check_pyocr():
     ocr = Ocr('./config.yaml')
     ocr.check_pyocr()
     return 'check developper console.'
+
+
+@app.route('/apis/translate/direct/', methods=['GET', 'POST'])
+def translate_direct():
+    if request.method == 'POST':
+        query = request.args
+        translate = TranslateApi()
+        result = translate.get_text(str(request.data))
+        resp = jsonify(
+            {
+                u'status_code': 200,
+                u'result': request.data
+            }
+        )
+        resp.status_code = 200
+        return resp
+
 
 
 @app.errorhandler(400)
