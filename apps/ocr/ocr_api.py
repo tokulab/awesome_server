@@ -7,7 +7,6 @@ import pyocr
 import pyocr.builders
 
 from .handler import imgio
-# from handler import imgio
 
 
 # base64をキャッチするとこを別ライブラリから記載

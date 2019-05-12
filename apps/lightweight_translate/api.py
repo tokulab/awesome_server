@@ -1,6 +1,6 @@
-from system.kernel import getter
+from .system.kernel import getter
 
-class TrainslateApi:
+class TranslateApi:
     def __init__(self):
         chdriver_path = './chromedriver'
         self.getter = getter.Crawler(chdriver_path)
