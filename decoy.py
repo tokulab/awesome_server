@@ -6,7 +6,6 @@ import gevent
 from apps.ocr.ocr_api import Ocr
 from apps.lightweight_translate.api import TranslateApi
 
-
 app = Flask(__name__)
 # sockets = Sockets(app=app)
 
@@ -48,12 +47,11 @@ def translate_direct():
         resp = jsonify(
             {
                 u'status_code': 200,
-                u'result': request.data
+                u'result': result
             }
         )
         resp.status_code = 200
         return resp
-
 
 
 @app.errorhandler(400)
