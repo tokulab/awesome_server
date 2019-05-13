@@ -38,20 +38,19 @@ def check_pyocr():
     return 'check developper console.'
 
 
-@app.route('/apis/translate/direct/', methods=['GET', 'POST'])
+@app.route('/apis/translate/direct', methods=['GET', 'POST'])
 def translate_direct():
-    if request.method == 'POST':
-        query = request.args
-        translate = TranslateApi()
-        result = translate.get_text(str(request.data))
-        resp = jsonify(
-            {
-                u'status_code': 200,
-                u'result': result
-            }
-        )
-        resp.status_code = 200
-        return resp
+    query = request.args.get('str')
+    translate = TranslateApi('apps/lightweight_translate/chromedriver')
+    result = translate.get_text(str(query))
+    resp = jsonify(
+        {
+            u'status_code': 200,
+            u'result': result
+        }
+    )
+    resp.status_code = 200
+    return resp
 
 
 @app.errorhandler(400)

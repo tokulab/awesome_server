@@ -4,6 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.chrome.options import Options
 
 from ..handler import error_handler as e_handler
 
@@ -12,7 +13,9 @@ class Crawler:
     def __init__(self, chdriver_path):
         import chromedriver_binary
         try:
-            self.driver = webdriver.Chrome(executable_path=chdriver_path)
+            op = Options()
+            op.add_argument('--headless')
+            self.driver = webdriver.Chrome(executable_path=chdriver_path, chrome_options=op)
             self.driver.implicitly_wait(3)
         except Exception as e:
             self._occur_err(e)
